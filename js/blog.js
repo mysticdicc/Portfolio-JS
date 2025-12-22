@@ -1,3 +1,4 @@
+import '../styles/web.css';
 import { BlogPost } from '/js/models.js';
 import { PostContainers } from '/js/models.js';
 
@@ -21,6 +22,19 @@ function onLoadBlogWindow() {
             blogTable.appendChild(container);
         });
     });
+
+    const element = document.getElementById("post_table");
+    setOpacityFade(element, true);
+}
+
+function setOpacityFade(element, isFadeIn) {
+    if (isFadeIn) { 
+        element.style.transition = "opacity 1s ease-in-out";
+        element.style.opacity = "1";
+    } else {
+        element.style.transition = "opacity 1s ease-in-out";
+        element.style.opacity = "0";
+    }
 }
 
 export async function fetchBlogPosts() {
@@ -28,4 +42,3 @@ export async function fetchBlogPosts() {
     const data = await response.json();
     return data.map(item => BlogPost.fromJSON(item));
 }
-

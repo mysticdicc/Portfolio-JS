@@ -39,30 +39,97 @@ article {
     overflow-y: auto;
     z-index: 50;
 
-    > p {
-        padding-left: 15vw;
-        padding-right: 15vw;
-        padding-bottom: 20px;
-        text-align: center;
-    }
-
-    > svg {
-        padding: 20px;
-        width: 40vw;
+    > .body_wrapper {
+        display: flex;
+        flex-direction: column;
+        max-width: 1400px;
         margin-left: auto;
         margin-right: auto;
-        z-index: 50;
-        display: inline-block;
-        min-height: fit-content;
 
-        path {
-            fill: rgba(0,0,0,0) !important;
-            stroke: rgba(0,0,0,0) !important; 
+        > p {
+            padding-left: 15vw;
+            padding-right: 15vw;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+
+        > svg {
+            padding: 20px;
+            max-width: 40vw;
+            max-height: 10rem;
+            margin-left: auto;
+            margin-right: auto;
+            z-index: 50;
+            display: inline-block;
+
+            path {
+                fill: rgba(0,0,0,0) !important;
+                stroke: rgba(0,0,0,0) !important; 
+            }
+        }
+
+        > .flex_row {
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    header {
+        height: auto;
+        padding: 10px 0;
+    }
+
+    article {
+        padding-top: 2rem;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 2rem;
+    }
+
+    .body_wrapper {
+        margin: 0;
+        max-width: calc(100% - 50px);
+
+        > p {
+            padding: 0;
+        }
+
+        > svg {
+            max-width: 80vw !important;
         }
     }
 
-    > .flex_row {
-        margin-bottom: 1rem;
+    #we_table > tbody > tr {
+        > td {
+            min-width: auto;
+        }
+    }
+
+    .we_table_row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .profile_image_wrapper > img {
+        max-width: 70vw !important;
+    }
+
+    #post_table > .post_container > .post_header {
+        flex-direction: column !important;
+
+        > .post_title {
+            margin: 0 !important;
+        } 
+        
+        > .post_date {
+            margin: 0 !important;
+        }
+    }
+
+    button {
+        padding: 10px !important;
+        height: 100% !important;
     }
 }
 
@@ -166,6 +233,8 @@ button:hover {
 }
 
 #post_table {
+    opacity: 0;
+
     > .post_container {
         padding: 1rem;
 

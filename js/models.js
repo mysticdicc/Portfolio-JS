@@ -83,7 +83,7 @@ export class PostContainers {
         bodywrapper.innerHTML = DOMPurify.sanitize(parsedMarkdown);
 
         if (isShort) {
-            let body = post.body.substring(0, 300) + "...";
+            let body = post.body.substring(0, 500) + "...";
             let parsedMarkdown = marked.parse(body);
             bodywrapper.innerHTML = DOMPurify.sanitize(parsedMarkdown);
 
