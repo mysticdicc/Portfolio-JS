@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "animejs": "^4.2.2"
+  },
+  "devDependencies": {
+    "vite": "^7.3.0"
+  }
+}
