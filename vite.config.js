@@ -1,5 +1,9 @@
 import handlebars from 'vite-plugin-handlebars';
-import { resolve } from 'path';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const pageData = {
     '/index.html': {
@@ -26,7 +30,22 @@ const pageData = {
         title: 'Portfolio',
         module: '/js/post.js',
         script: '/js/post-events.js',
-    }
+    },
+    '/login.html' : {
+        title: 'Portfolio - Login',
+        module: '/js/login-logout.js',
+        script: '/js/empty.js',
+    },
+    '/logout.html' : {
+        title: 'Portfolio - Logout',
+        module: '/js/login-logout.js',
+        script: '/js/empty.js',
+    },
+    '/login-redirect.html' : {
+        title: 'Portfolio - Login Redirect',
+        module: '/js/login-redirect.js',
+        script: '/js/empty.js',
+    },
 };
 
 export default {

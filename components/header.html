@@ -11,7 +11,21 @@
     <a href="it-projects.html">
         <button>IT Projects</button>
     </a>
-    <a href="">
+    <a id="loginlogout" href="login.html">
         <button>Log In</button>
     </a>
 </header>
+
+<script>
+    if (null != window.msalInstance) {
+        const element = document.getElementById("loginlogout");
+        
+        if (window.msalInstance.getAllAccounts().length > 0) {
+            element.href = "logout.html";
+            element.children[0].innerText = "Log Out";
+        } else {
+            element.href = "login.html";
+            element.children[0].innerText = "Log In";
+        }
+    }
+</script>

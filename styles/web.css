@@ -74,7 +74,7 @@ article {
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
     header {
         height: auto;
         padding: 10px 0;
@@ -92,7 +92,10 @@ article {
         max-width: calc(100% - 50px);
 
         > p {
-            padding: 0;
+            padding-left: 5vw !important;
+            padding-right: 5vw !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
         }
 
         > svg {
@@ -130,6 +133,16 @@ article {
     button {
         padding: 10px !important;
         height: 100% !important;
+    }
+
+    :is(h1, h2, h3, h4, h5, h6) {
+        margin: 0 !important;
+    }
+
+    .work_experience_wrapper {
+        .flex_row {
+            align-items: center;
+        }
     }
 }
 
