@@ -12,9 +12,9 @@ function onLoadItWindow() {
         const blogTable = document.getElementById("post_table");
 
         posts.forEach((post, index) => {
-            const container = PostContainers.createParentContainer();
+            const container = PostContainers.createParentContainer(true);
             const header = PostContainers.createPostHeader(post);
-            const body = PostContainers.createPostBody(post);
+            const body = PostContainers.createPostBody(post, true);
             
             container.appendChild(header);
             container.appendChild(body);

@@ -22,6 +22,11 @@ const pageData = {
         module: 'js/it-projects.js',
         script: 'js/it-projects-events.js',
     },
+    '/post.html': {
+        title: 'Portfolio',
+        module: 'js/post.js',
+        script: 'js/post-events.js',
+    }
 };
 
 export default {

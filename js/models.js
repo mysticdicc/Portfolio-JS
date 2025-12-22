@@ -62,23 +62,50 @@ export class ItProjectPost {
 }
 
 export class PostContainers {
-    static createParentContainer() {
+    static createParentContainer(isShort) {
         let postContainer = document.createElement("div");
         postContainer.classList.add("post_container");
         
-        let line = document.createElement("div");
-        line.classList.add("grey_line");
-        postContainer.appendChild(line);
+        if (isShort) { 
+            let line = document.createElement("div");
+            line.classList.add("grey_line");
+            postContainer.appendChild(line);
+        }
 
         return postContainer;
     }
 
-    static createPostBody(post) {
+    static createPostBody(post, isShort) {
         let bodywrapper = document.createElement("div");
         bodywrapper.classList.add("post_body");
 
         let parsedMarkdown = marked.parse(post.body);
         bodywrapper.innerHTML = DOMPurify.sanitize(parsedMarkdown);
+
+        if (isShort) {
+            let body = post.body.substring(0, 300) + "...";
+            let parsedMarkdown = marked.parse(body);
+            bodywrapper.innerHTML = DOMPurify.sanitize(parsedMarkdown);
+
+            let a = document.createElement("a");
+            a.href = "/post.html?id=" + post.id;
+
+            let button = document.createElement("button");
+            button.textContent = "Read More";
+
+            a.appendChild(button);
+
+            let div = document.createElement("div");
+            div.classList.add("flex_row");
+            div.appendChild(a);
+
+            bodywrapper.appendChild(div);
+        }
+        else
+        {
+            let parsedMarkdown = marked.parse(post.body);
+            bodywrapper.innerHTML = DOMPurify.sanitize(parsedMarkdown);
+        }
 
         return bodywrapper;
     }
