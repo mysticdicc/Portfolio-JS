@@ -165,30 +165,30 @@ button:hover {
     }
 }
 
-#blog_table {
-    > .blog_post_container {
+#post_table {
+    > .post_container {
         padding: 1rem;
 
-        >.blog_post_header {
+        > .post_header {
             display: flex;
             flex-direction: row;
             width: 100%;
             margin-top: 1rem;
 
-            > .blog_post_title {
+            > .post_title {
                 margin-left: 0;
                 margin-right: auto;
                 font-weight: bold;
                 font-size: 25px;
             }
 
-            > .blog_post_date {
+            > .post_date {
                 margin-right: 0;
                 margin-left: auto;
             }
         }
 
-        > .blog_post_body {
+        > .post_body {
             margin-top: 10px;
             line-height: 1.5;
         }
