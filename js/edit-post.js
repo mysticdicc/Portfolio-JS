@@ -7,12 +7,32 @@ const apiroot = "https://portfolio.richweb.uk/"
 const blogroot = apiroot + "post/"
 const imgroot = apiroot + "image/"
 let caroIndex = 0;
+let isNewPost = false;
 
 window.onload = onLoadEditPostWindow;
 
 async function onLoadEditPostWindow() {
     const blogTable = document.getElementById("edit_post_container");
-        await fetchPostById(new URLSearchParams(window.location.search).get("id")).then(post => {
+    let postId = new URLSearchParams(window.location.search).get("id");
+
+    if (null == postId) {
+        let post = new WebsitePost();
+        post.id = crypto.randomUUID();
+        post.websitePostType = 0;
+
+        const container = createParentContainer();
+        const header = createEditHeader(post);
+        const body = createEditBody(post);
+
+        container.appendChild(header);
+        container.appendChild(body);
+        blogTable.appendChild(container);
+
+        window.post = post;
+        isNewPost = true;
+
+    } else {
+        await fetchPostById(postId).then(post => {
             const container = createParentContainer();
             const header = createEditHeader(post);
             const body = createEditBody(post);
@@ -22,7 +42,9 @@ async function onLoadEditPostWindow() {
             blogTable.appendChild(container);
 
             window.post = post;
+            isNewPost = false;
         })
+    }
 
     setOpacityFade(blogTable, true);
     configureCarouselButtons();
@@ -37,12 +59,28 @@ async function fetchPostById(id) {
 async function editPost(post) {
     let json = JSON.stringify(WebsitePost.toJson(post));
     let token = await getAuthToken()
-    
-    await fetch(blogroot + "post/edit", {
+    let endpoint = isNewPost ? "post/new" : "post/edit"
+
+    if (isNewPost) {
+        isNewPost = false;
+    }
+
+    await fetch(blogroot + endpoint, {
         method: 'POST',
         body: json,
         headers: {
             'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + token
+        }
+    })
+}
+
+async function deletePost(postId) {
+    let token = await getAuthToken()
+    
+    await fetch(blogroot + "post/delete?id=" + postId, {
+        method: 'POST',
+        headers: {
             'Authorization' : 'Bearer ' + token
         }
     })
@@ -110,7 +148,27 @@ function createEditBody(post) {
         post.body = event.target.value;
     });
 
+    let select = document.createElement("select");
+    select.id = "post_type_select";
+    let optionBlog = document.createElement("option");
+    optionBlog.value = "0";
+    optionBlog.text = "Blog";
+    let optionDev = document.createElement("option");
+    optionDev.value = "1";
+    optionDev.text = "Dev Project";
+    let optionIt = document.createElement("option");
+    optionIt.value = "2";
+    optionIt.text = "IT Project";
+    select.appendChild(optionBlog);
+    select.appendChild(optionDev);
+    select.appendChild(optionIt);
+    select.value = post.websitePostType;
+    select.addEventListener('change', (event) => {
+        post.websitePostType = parseInt(event.target.value);
+    });
+
     body.appendChild(contentTextarea);
+    body.appendChild(select);
 
     let caro = PostContainers.createImageCarousel(post.images, true);
     body.appendChild(caro);
@@ -139,9 +197,11 @@ function createDeleteButton() {
     let button = document.createElement("button");
     button.id = "delete_post_button";
     button.innerText = "Delete Post";
-
+    button.onclick = () => {deletePost(window.post.id).then(() => {window.location.href = "/index.html"})}
+    
     return button;
 }
+
 
 function onClickNextCarousel() {
     let oldimage = document.getElementById("carousel_image_" + caroIndex);
@@ -230,8 +290,8 @@ function createCareousel(images) {
     wrapper.parentNode.removeChild(wrapper);
 
     let newCaro = PostContainers.createImageCarousel(images, true);
-    let textArea = document.getElementById("post_content_textarea");
-    textArea.after(newCaro);
+    let before = document.getElementById("post_type_select");
+    before.after(newCaro);
 
     configureCarouselButtons();
 }

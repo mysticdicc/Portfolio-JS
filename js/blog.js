@@ -28,6 +28,12 @@ function onLoadBlogWindow() {
 
     const element = document.getElementById("post_table");
     setOpacityFade(element, true);
+
+    if (authState) {
+        const newButtonContainer = document.getElementById("new_button");
+        const newPostButton = createNewPostButton();
+        newButtonContainer.appendChild(newPostButton);
+    }
 }
 
 function setOpacityFade(element, isFadeIn) {
@@ -44,4 +50,15 @@ export async function fetchBlogPosts() {
     const response = await fetch(blogroot + "get/blogs/all");
     const data = await response.json();
     return data.map(item => WebsitePost.fromJSON(item));
+}
+
+function createNewPostButton() {
+    let a = document.createElement("a");
+    a.href = "/edit-post.html";
+
+    let button = document.createElement("button");
+    button.innerText = "New Post";
+
+    a.appendChild(button);
+    return a;
 }

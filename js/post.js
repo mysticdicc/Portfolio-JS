@@ -63,7 +63,7 @@ function onClickNextCarousel() {
     }
 
     let expand = document.getElementById("carousel_expand_link");
-    expand.href = window.post.images[caroIndex];
+    expand.href = window.post.images[caroIndex].remotepath;;
 
     let newimage = document.getElementById("carousel_image_" + caroIndex);
     newimage.style.display = "block";
@@ -81,7 +81,7 @@ function onClickPrevCarousel() {
     }
 
     let expand = document.getElementById("carousel_expand_link");
-    expand.href = window.post.images[caroIndex];
+    expand.href = window.post.images[caroIndex].remotepath;;
 
     let newimage = document.getElementById("carousel_image_" + caroIndex);
     newimage.style.display = "block";

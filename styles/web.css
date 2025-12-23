@@ -136,7 +136,8 @@ article {
     }
 
     :is(h1, h2, h3, h4, h5, h6) {
-        margin: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
 
     .work_experience_wrapper {
@@ -169,7 +170,7 @@ button:hover {
     transform: scale(1.1);
 }
 
-input, textarea {
+select, input, textarea {
     width: 100%;
     padding: 10px;
     background-color: var(--light-grey);
@@ -180,7 +181,7 @@ input, textarea {
     font-size: 20px;
 }
 
-input:focus, textarea:focus {
+select:focus, input:focus, textarea:focus {
     outline: var(--secondary) solid 2px;
     background-color: var(--grey);
 }
@@ -253,6 +254,10 @@ input:focus, textarea:focus {
     border-radius: 20px;
     background-color: rgba(25,25,25,0.4);
     padding: 20px;
+
+    #new_button > a {
+        margin-bottom: 10px;
+    }
 
     > h2 {
         text-align: center;
@@ -466,6 +471,7 @@ input:focus, textarea:focus {
         > textarea {
             min-height: 10rem;
             resize: vertical;
+            margin-bottom: 10px;
         }
 
         > .flex_row {

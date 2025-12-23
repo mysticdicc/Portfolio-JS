@@ -28,6 +28,12 @@ function onLoadItWindow() {
 
     const element = document.getElementById("post_table");
     setOpacityFade(element, true);
+
+    if (authState) {
+        const newButtonContainer = document.getElementById("new_button");
+        const newPostButton = createNewPostButton();
+        newButtonContainer.appendChild(newPostButton);
+    }
 }
 
 function setOpacityFade(element, isFadeIn) {
@@ -46,3 +52,13 @@ export async function fetchItPosts() {
     return data.map(item => WebsitePost.fromJSON(item));
 }
 
+function createNewPostButton() {
+    let a = document.createElement("a");
+    a.href = "/edit-post.html";
+
+    let button = document.createElement("button");
+    button.innerText = "New Post";
+
+    a.appendChild(button);
+    return a;
+}
