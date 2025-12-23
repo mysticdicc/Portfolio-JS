@@ -9,42 +9,34 @@ const pageData = {
     '/index.html': {
         title: 'Portfolio - Home',
         module: '/js/index.js',
-        script: '/js/index-events.js',
     },
     '/dev-projects.html': {
         title: 'Portfolio - Dev Projects',
         module: '/js/dev-projects.js',
-        script: '/js/dev-projects-events.js',
     },
     '/blog.html': {
         title: 'Portfolio - Blog',
         module: '/js/blog.js',
-        script: '/js/blog-events.js',
     },
     '/it-projects.html': {
         title: 'Portfolio - IT Projects',
         module: '/js/it-projects.js',
-        script: '/js/it-projects-events.js',
     },
     '/post.html': {
         title: 'Portfolio',
         module: '/js/post.js',
-        script: '/js/post-events.js',
     },
     '/login.html' : {
         title: 'Portfolio - Login',
         module: '/js/login-logout.js',
-        script: '/js/empty.js',
     },
     '/logout.html' : {
         title: 'Portfolio - Logout',
         module: '/js/login-logout.js',
-        script: '/js/empty.js',
     },
     '/login-redirect.html' : {
         title: 'Portfolio - Login Redirect',
         module: '/js/login-redirect.js',
-        script: '/js/empty.js',
     },
 };
 
@@ -66,6 +58,9 @@ export default {
                 devProjects: resolve(__dirname, 'dev-projects.html'),
                 itProjects: resolve(__dirname, 'it-projects.html'),
                 post: resolve(__dirname, 'post.html'),
+                login: resolve(__dirname, 'login.html'),
+                logout: resolve(__dirname, 'logout.html'),
+                loginRedirect: resolve(__dirname, 'login-redirect.html'),
             },
             output: {
                 assetFileNames: (assetInfo) => {

@@ -5,7 +5,7 @@ import { PostContainers } from '/js/models.js';
 const apiroot = "https://portfolio.richweb.uk/"
 const blogroot = apiroot + "blogpost/"
 
-window.onload += onLoadBlogWindow;
+window.onload = onLoadBlogWindow;
 
 function onLoadBlogWindow() {
     fetchBlogPosts().then(posts => {
