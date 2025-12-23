@@ -1,89 +1,81 @@
 import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 import DOMPurify from 'dompurify';
+import { name } from "msal/lib-commonjs/packageMetadata";
 
-export class BlogPost {
-    constructor({ id = crypto.randomUUID(), title = '', body = '', lastSubmit = new Date(), images = [] } = {}) {
+export class WebsitePost {
+    constructor({ id = '', title = '', body = '', lastSubmit = new Date(), images = [], websitePostType = 0 } = {}) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.lastSubmit = lastSubmit;
         this.images = images;
+        this.websitePostType = websitePostType;
     }
 
     static fromJSON(json) {
-        return new BlogPost({
+        return new WebsitePost({
             id: json.ID,
             title: json.Title,
             body: json.Body,
             lastSubmit: new Date(json.LastSubmit),
+            websitePostType: json.WebsitePostType,
             images: Image.fromListJson(json.Images || [])
         });
     }
-}
 
-export class DevProjectPost {
-    constructor({ id = crypto.randomUUID(), title = '', body = '', lastSubmit = new Date(), images = [] } = {}) {
-        this.id = id;
-        this.title = title;
-        this.body = body;
-        this.lastSubmit = lastSubmit;
-        this.images = images;
-    }
-
-    static fromJSON(json) {
-        return new BlogPost({
-            id: json.ID,
-            title: json.Title,
-            body: json.Body,
-            lastSubmit: new Date(json.LastSubmit),
-            images: Image.fromListJson(json.Images || [])
-        });
-    }
-}
-
-export class ItProjectPost {
-    constructor({ id = crypto.randomUUID(), title = '', body = '', lastSubmit = new Date(), images = [] } = {}) {
-        this.id = id;
-        this.title = title;
-        this.body = body;
-        this.lastSubmit = lastSubmit;
-        this.images = images;
-    }
-
-    static fromJSON(json) {
-        return new BlogPost({
-            id: json.ID,
-            title: json.Title,
-            body: json.Body,
-            lastSubmit: new Date(json.LastSubmit),
-            images: Image.fromListJson(json.Images || [])
-        });
+    static toJson(post) {
+        return {
+            ID: post.id,
+            Title: post.title,
+            Body: post.body,
+            LastSubmit: post.lastSubmit.toISOString(),
+            WebsitePostType: post.websitePostType,
+            Images: Image.toListJson(post.images)
+        };
     }
 }
 
 export class Image {
-    constructor({id = crypto.randomUUID(), name = '', localpath = '', remotepath = '', fileextension = '', postid = ''} = {}) {
+    constructor({id = '', name = '', localpath = '', remotepath = '', fileextension = '', postid = '', base64string = ''} = {}) {
         this.id = id;
         this.name = name;
         this.localpath = localpath;
         this.remotepath = remotepath;
         this.fileextension = fileextension;
         this.postid = postid;
+        this.base64string = base64string;
     }
 
     static fromJSON(json) {
         return new Image({
-            id: json.ID,
+            id: json.Id,
             name: json.Name,
             localpath: json.LocalPath,
             remotepath: json.RemotePath,
             fileextension: json.FileExtension,
-            postid: json.PostID
+            postid: json.PostId,
+            base64string: json.Base64String
         });
+    }
+
+    static toJson(image) {
+        return {
+            ID: image.id,
+            Name: image.name,
+            LocalPath: image.localpath,
+            RemotePath: image.remotepath,
+            FileExtension: image.fileextension,
+            PostId: image.postid,
+            Base64String: image.base64string
+        };
     }
 
     static fromListJson(jsonArray) {
         return jsonArray.map(item => Image.fromJSON(item));
+    }
+
+    static toListJson(imageArray) {
+        return imageArray.map(item => Image.toJson(item));
     }
 }
 
@@ -182,7 +174,7 @@ export class PostContainers {
         return a;
     }
 
-    static createImageCarousel(images) {
+    static createImageCarousel(images, isEdit) {
         let wrapper = document.createElement("div");
         wrapper.className = "image_carousel_wrapper";
 
@@ -218,6 +210,21 @@ export class PostContainers {
 
         row.appendChild(prevbutton);
         row.appendChild(a);
+
+        if (isEdit) {
+            let deletebutton = document.createElement("button");
+            deletebutton.id = "carousel_delete_button";
+            deletebutton.innerText = "X";
+            row.appendChild(deletebutton);
+
+            let uploadbutton = document.createElement("input");
+            uploadbutton.type = "file";
+            uploadbutton.accept = "image/*";
+            uploadbutton.id = "carousel_upload_button";
+            uploadbutton.innerText = "^";
+            row.appendChild(uploadbutton);
+        }
+
         row.appendChild(nextbutton);
 
         wrapper.appendChild(row);

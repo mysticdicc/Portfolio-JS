@@ -175,7 +175,7 @@ input, textarea {
     background-color: var(--light-grey);
     color: var(--white);
     border: none;
-    border-radius: 20px;
+    border-radius: 10px;
     box-sizing: border-box;
     font-size: 20px;
 }
@@ -268,7 +268,6 @@ input:focus, textarea:focus {
     flex-direction: column;
 
     > .post_container {
-        padding: 1rem;
 
         > .post_header {
             display: flex;
@@ -295,6 +294,7 @@ input:focus, textarea:focus {
 
             > .flex_row {
                 margin-top: 20px;
+                margin-bottom: 20px;
 
                 > a > button:nth-child(1) {
                     margin-left: 10px;
@@ -465,10 +465,11 @@ input:focus, textarea:focus {
 
         > textarea {
             min-height: 10rem;
+            resize: vertical;
         }
 
         > .flex_row {
-            margin-top: 10px;
+            margin-top: 20px;
             gap: 10px;
         }
     }
@@ -482,10 +483,12 @@ input:focus, textarea:focus {
     border-radius: 20px;
     overflow: hidden;
     padding-top: 10px;
+    margin-top: 10px;
 
     .carousel_image {
         display: none;
         max-width: 80%;
+        margin-bottom: 10px;
     }
 
     .flex_row {
@@ -495,6 +498,25 @@ input:focus, textarea:focus {
         > button {
             height: 3rem !important;
             width: 3rem !important;
+        }
+
+        > input {
+            width: auto !important;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .image_carousel_wrapper {
+        .carousel_image {
+            max-width: 90% !important;
+        }
+
+        .flex_row {
+            > button {
+                height: 2rem !important;
+                width: 2rem !important;
+            }
         }
     }
 }

@@ -1,10 +1,13 @@
 import { PublicClientApplication } from "@azure/msal-browser";
 
+const prodRedirect = "https://portfolio.richweb.uk/login-redirect.html";
+const devRedirect = "http://localhost:5173/login-redirect.html";
+
 const msalConfig = {
   auth: {
     clientId: "7d1ba0fc-fef6-4827-8328-fe467f5ceba8",
     authority: "https://login.microsoftonline.com/900269ce-f8d4-4048-8883-1df6b8de010a",
-    redirectUri: "https://portfolio.richweb.uk/login-redirect.html"
+    redirectUri: prodRedirect
   }
 };
 

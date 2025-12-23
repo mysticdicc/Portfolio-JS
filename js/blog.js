@@ -1,5 +1,5 @@
 import '../styles/web.css';
-import { BlogPost } from '/js/models.js';
+import { WebsitePost } from '/js/models.js';
 import { PostContainers } from '/js/models.js';
 import { getAuthState } from '/js/auth.js';
 
@@ -43,5 +43,5 @@ function setOpacityFade(element, isFadeIn) {
 export async function fetchBlogPosts() {
     const response = await fetch(blogroot + "get/blogs/all");
     const data = await response.json();
-    return data.map(item => BlogPost.fromJSON(item));
+    return data.map(item => WebsitePost.fromJSON(item));
 }

@@ -1,5 +1,5 @@
 import '../styles/web.css';
-import { ItProjectPost } from '/js/models.js';
+import { WebsitePost } from '/js/models.js';
 import { PostContainers } from '/js/models.js';
 import { getAuthState } from '/js/auth.js';
 
@@ -43,6 +43,6 @@ function setOpacityFade(element, isFadeIn) {
 export async function fetchItPosts() {
     const response = await fetch(itroot + "get/it-projects/all");
     const data = await response.json();
-    return data.map(item => ItProjectPost.fromJSON(item));
+    return data.map(item => WebsitePost.fromJSON(item));
 }
 

@@ -1,5 +1,5 @@
 import '../styles/web.css';
-import { BlogPost } from '/js/models.js';
+import { WebsitePost } from '/js/models.js';
 import { PostContainers } from '/js/models.js';
 
 const apiroot = "https://portfolio.richweb.uk/"
@@ -48,7 +48,7 @@ function setOpacityFade(element, isFadeIn) {
 export async function fetchPostById(id) {
     const response = await fetch(blogroot + "get/byid?id=" + id);
     const data = await response.json();
-    return BlogPost.fromJSON(data); 
+    return WebsitePost.fromJSON(data); 
 }
 
 function onClickNextCarousel() {
