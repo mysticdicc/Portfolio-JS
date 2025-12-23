@@ -478,9 +478,10 @@ input:focus, textarea:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--grey);
+    background-color: rgba(20, 20, 20, 0.5);
     border-radius: 20px;
     overflow: hidden;
+    padding-top: 10px;
 
     .carousel_image {
         display: none;
@@ -488,6 +489,12 @@ input:focus, textarea:focus {
     }
 
     .flex_row {
-        background-color: var(--light-grey);;
+        background-color: var(--light-grey);
+        padding: 5px;
+
+        > button {
+            height: 3rem !important;
+            width: 3rem !important;
+        }
     }
 }

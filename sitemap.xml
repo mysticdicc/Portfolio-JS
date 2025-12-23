@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://portfolio.richweb.uk/</loc>
+  </url>
+  <url>
+    <loc>https://portfolio.richweb.uk/index.html</loc>
+  </url>
+  <url>
+    <loc>https://portfolio.richweb.uk/blog.html</loc>
+  </url>
+  <url>
+    <loc>https://portfolio.richweb.uk/dev-projects.html</loc>
+  </url>
+  <url>
+    <loc>https://portfolio.richweb.uk/it-projects.html</loc>
+  </url>
+  <url>
+    <loc>https://portfolio.richweb.uk/post.html</loc>
+  </url>
+  <url>
+    <loc>https://portfolio.richweb.uk/login.html</loc>
+  </url>
+  <url>
+    <loc>https://portfolio.richweb.uk/logout.html</loc>
+  </url>
+  <url>
+    <loc>https://portfolio.richweb.uk/login-redirect.html</loc>
+  </url>
+  <url>
+    <loc>https://portfolio.richweb.uk/edit-post.html</loc>
+  </url>
+</urlset>

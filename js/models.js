@@ -1,6 +1,5 @@
 import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 import DOMPurify from 'dompurify';
-import { create } from "handlebars";
 
 export class BlogPost {
     constructor({ id = crypto.randomUUID(), title = '', body = '', lastSubmit = new Date(), images = [] } = {}) {
@@ -17,7 +16,7 @@ export class BlogPost {
             title: json.Title,
             body: json.Body,
             lastSubmit: new Date(json.LastSubmit),
-            images: json.Images || []
+            images: Image.fromListJson(json.Images || [])
         });
     }
 }
@@ -37,7 +36,7 @@ export class DevProjectPost {
             title: json.Title,
             body: json.Body,
             lastSubmit: new Date(json.LastSubmit),
-            images: json.Images || []
+            images: Image.fromListJson(json.Images || [])
         });
     }
 }
@@ -57,8 +56,34 @@ export class ItProjectPost {
             title: json.Title,
             body: json.Body,
             lastSubmit: new Date(json.LastSubmit),
-            images: json.Images || []
+            images: Image.fromListJson(json.Images || [])
         });
+    }
+}
+
+export class Image {
+    constructor({id = crypto.randomUUID(), name = '', localpath = '', remotepath = '', fileextension = '', postid = ''} = {}) {
+        this.id = id;
+        this.name = name;
+        this.localpath = localpath;
+        this.remotepath = remotepath;
+        this.fileextension = fileextension;
+        this.postid = postid;
+    }
+
+    static fromJSON(json) {
+        return new Image({
+            id: json.ID,
+            name: json.Name,
+            localpath: json.LocalPath,
+            remotepath: json.RemotePath,
+            fileextension: json.FileExtension,
+            postid: json.PostID
+        });
+    }
+
+    static fromListJson(jsonArray) {
+        return jsonArray.map(item => Image.fromJSON(item));
     }
 }
 
@@ -161,9 +186,9 @@ export class PostContainers {
         let wrapper = document.createElement("div");
         wrapper.className = "image_carousel_wrapper";
 
-        images.forEach((imageSrc, index) => { 
+        images.forEach((img, index) => { 
             let image = document.createElement("img");
-            image.src = imageSrc;
+            image.src = img.remotepath;
             image.className = "carousel_image";
             image.id = "carousel_image_" + index;
             wrapper.appendChild(image);
