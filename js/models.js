@@ -1,6 +1,5 @@
 import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 import DOMPurify from 'dompurify';
-import { name } from "msal/lib-commonjs/packageMetadata";
 
 export class WebsitePost {
     constructor({ id = '', title = '', body = '', lastSubmit = new Date(), images = [], websitePostType = 0 } = {}) {

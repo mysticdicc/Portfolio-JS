@@ -188,7 +188,7 @@ function createSaveButton() {
     let button = document.createElement("button");
     button.id = "save_post_button";
     button.innerText = "Save Post";
-    button.onclick = () => {editPost(window.post)}
+    button.onclick = () => {editPost(window.post).then(() => {window.location.href = "/post.html?id=" + window.post.id})}
 
     return button;
 }

@@ -22,6 +22,11 @@ async function onLoadPostWindow() {
             window.post = post;
         })
 
+        if (window.post != null) {
+            const skel = document.getElementById("post_skeleton");
+            skel.style.display = "none";
+        }
+
     setOpacityFade(blogTable, true);
     
     let nextButton = document.getElementById("carousel_next_button");

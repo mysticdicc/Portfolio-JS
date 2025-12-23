@@ -24,6 +24,11 @@ function onLoadItWindow() {
             container.appendChild(body);
             blogTable.appendChild(container);
         });
+
+        if (posts.length > 0) {
+            const skel = document.getElementById("post_skeleton");
+            skel.style.display = "none";
+        }
     });
 
     const element = document.getElementById("post_table");
