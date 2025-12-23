@@ -473,3 +473,21 @@ input:focus, textarea:focus {
         }
     }
 }
+
+.image_carousel_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--grey);
+    border-radius: 20px;
+    overflow: hidden;
+
+    .carousel_image {
+        display: none;
+        max-width: 80%;
+    }
+
+    .flex_row {
+        background-color: var(--light-grey);;
+    }
+}

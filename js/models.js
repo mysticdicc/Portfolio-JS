@@ -105,6 +105,11 @@ export class PostContainers {
         {
             let parsedMarkdown = marked.parse(post.body);
             bodywrapper.innerHTML = DOMPurify.sanitize(parsedMarkdown);
+
+            if (post.images.length > 0) { 
+                let carousel = this.createImageCarousel(post.images);
+                bodywrapper.appendChild(carousel);
+            }
         }
 
         return bodywrapper;
@@ -150,5 +155,48 @@ export class PostContainers {
         a.appendChild(button);
 
         return a;
+    }
+
+    static createImageCarousel(images) {
+        let wrapper = document.createElement("div");
+        wrapper.className = "image_carousel_wrapper";
+
+        images.forEach((imageSrc, index) => { 
+            let image = document.createElement("img");
+            image.src = imageSrc;
+            image.className = "carousel_image";
+            image.id = "carousel_image_" + index;
+            wrapper.appendChild(image);
+        })
+
+        let nextbutton = document.createElement("button");
+        nextbutton.id = "carousel_next_button";
+        nextbutton.innerText = ">";
+
+        let prevbutton = document.createElement("button");
+        prevbutton.id = "carousel_prev_button";
+        prevbutton.innerText = "<";
+
+        let a = document.createElement("a");
+        a.href = images[0];
+        a.target = "_blank";
+        a.id = "carousel_expand_link";
+        
+        let expandbutton = document.createElement("button");
+        expandbutton.id = "carousel_expand_button";
+        expandbutton.innerText = "⤢";
+
+        a.appendChild(expandbutton);
+
+        let row = document.createElement("div");
+        row.className = "flex_row";
+
+        row.appendChild(prevbutton);
+        row.appendChild(a);
+        row.appendChild(nextbutton);
+
+        wrapper.appendChild(row);
+
+        return wrapper;
     }
 }
