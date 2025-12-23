@@ -1,5 +1,6 @@
 import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 import DOMPurify from 'dompurify';
+import { create } from "handlebars";
 
 export class BlogPost {
     constructor({ id = crypto.randomUUID(), title = '', body = '', lastSubmit = new Date(), images = [] } = {}) {
@@ -75,7 +76,7 @@ export class PostContainers {
         return postContainer;
     }
 
-    static createPostBody(post, isShort) {
+    static createPostBody(post, isShort, isAdmin) {
         let bodywrapper = document.createElement("div");
         bodywrapper.classList.add("post_body");
 
@@ -87,17 +88,16 @@ export class PostContainers {
             let parsedMarkdown = marked.parse(body);
             bodywrapper.innerHTML = DOMPurify.sanitize(parsedMarkdown);
 
-            let a = document.createElement("a");
-            a.href = "/post.html?id=" + post.id;
-
-            let button = document.createElement("button");
-            button.textContent = "Read More";
-
-            a.appendChild(button);
+            let a = this.createReadMoreButton(post);
 
             let div = document.createElement("div");
             div.classList.add("flex_row");
             div.appendChild(a);
+            
+            if (isAdmin) {
+                let editButton = this.createEditButton(post);
+                div.appendChild(editButton);
+            }
 
             bodywrapper.appendChild(div);
         }
@@ -126,5 +126,29 @@ export class PostContainers {
         blogHeader.appendChild(date);
 
         return blogHeader;
+    }
+
+    static createReadMoreButton(post) {
+        let a = document.createElement("a");
+        a.href = "/post.html?id=" + post.id;
+
+        let button = document.createElement("button");
+        button.textContent = "Read More";
+
+        a.appendChild(button);
+
+        return a;
+    }
+
+    static createEditButton(post) {
+        let a = document.createElement("a");
+        a.href = "/edit-post.html?id=" + post.id;
+
+        let button = document.createElement("button");
+        button.textContent = "Edit Post";
+
+        a.appendChild(button);
+
+        return a;
     }
 }

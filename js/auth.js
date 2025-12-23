@@ -28,3 +28,6 @@ async function initAuth() {
   }
 }
 
+export function getAuthState() {
+  return msalInstance.getAllAccounts().length > 0;
+}

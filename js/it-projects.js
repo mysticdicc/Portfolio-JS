@@ -1,6 +1,7 @@
 import '../styles/web.css';
 import { ItProjectPost } from '/js/models.js';
 import { PostContainers } from '/js/models.js';
+import { getAuthState } from '/js/auth.js';
 
 const apiroot = "https://portfolio.richweb.uk/"
 const itroot = apiroot + "itprojectpost/"
@@ -8,6 +9,8 @@ const itroot = apiroot + "itprojectpost/"
 window.onload = onLoadItWindow;
 
 function onLoadItWindow() {
+    const authState = getAuthState();
+
     fetchItPosts().then(posts => {
         posts.sort((a, b) => b.lastSubmit - a.lastSubmit);
         const blogTable = document.getElementById("post_table");
@@ -15,7 +18,7 @@ function onLoadItWindow() {
         posts.forEach((post, index) => {
             const container = PostContainers.createParentContainer(true);
             const header = PostContainers.createPostHeader(post);
-            const body = PostContainers.createPostBody(post, true);
+            const body = PostContainers.createPostBody(post, true, authState);
             
             container.appendChild(header);
             container.appendChild(body);

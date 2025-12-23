@@ -1,6 +1,7 @@
 import '../styles/web.css';
 import { DevProjectPost } from '/js/models.js';
 import { PostContainers } from '/js/models.js';
+import { getAuthState } from '/js/auth.js';
 
 const apiroot = "https://portfolio.richweb.uk/"
 const devroot = apiroot + "devprojectpost/"
@@ -8,6 +9,8 @@ const devroot = apiroot + "devprojectpost/"
 window.onload = onLoadDevWindow;
 
 function onLoadDevWindow() {
+    const authState = getAuthState();
+
     fetchDevPosts().then(posts => {
         posts.sort((a, b) => b.lastSubmit - a.lastSubmit);
         const blogTable = document.getElementById("post_table");
@@ -15,7 +18,7 @@ function onLoadDevWindow() {
         posts.forEach((post, index) => {
             const container = PostContainers.createParentContainer(true);
             const header = PostContainers.createPostHeader(post);
-            const body = PostContainers.createPostBody(post, true);
+            const body = PostContainers.createPostBody(post, true, authState);
             
             container.appendChild(header);
             container.appendChild(body);

@@ -100,6 +100,7 @@ article {
 
         > svg {
             max-width: 80vw !important;
+            padding-bottom: 0 !important;
         }
     }
 
@@ -273,6 +274,14 @@ button:hover {
         > .post_body {
             margin-top: 10px;
             line-height: 1.5;
+
+            > .flex_row {
+                margin-top: 20px;
+
+                > a > button:nth-child(1) {
+                    margin-left: 10px;
+                } 
+            }
         }
     }
 }
