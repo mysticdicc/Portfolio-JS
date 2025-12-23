@@ -4,7 +4,7 @@ import { PostContainers } from '/js/models.js';
 import { getAuthState } from '/js/auth.js';
 
 const apiroot = "https://portfolio.richweb.uk/"
-const devroot = apiroot + "devprojectpost/"
+const blogroot = apiroot + "post/"
 
 window.onload = onLoadDevWindow;
 
@@ -41,7 +41,7 @@ function setOpacityFade(element, isFadeIn) {
 }
 
 export async function fetchDevPosts() {
-    const response = await fetch(devroot + "get/all");
+    const response = await fetch(blogroot + "get/dev-projects/all");
     const data = await response.json();
     return data.map(item => DevProjectPost.fromJSON(item));
 }

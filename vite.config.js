@@ -38,6 +38,10 @@ const pageData = {
         title: 'Portfolio - Login Redirect',
         module: '/js/login-redirect.js',
     },
+    '/edit-post.html' : {
+        title: 'Portfolio - Edit Post',
+        module: '/js/edit-post.js',
+    }
 };
 
 export default {
@@ -61,6 +65,7 @@ export default {
                 login: resolve(__dirname, 'login.html'),
                 logout: resolve(__dirname, 'logout.html'),
                 loginRedirect: resolve(__dirname, 'login-redirect.html'),
+                editPost: resolve(__dirname, 'edit-post.html'),
             },
             output: {
                 assetFileNames: (assetInfo) => {

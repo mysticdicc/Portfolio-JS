@@ -5,11 +5,10 @@ import { PostContainers } from '/js/models.js';
 const apiroot = "https://portfolio.richweb.uk/"
 const blogroot = apiroot + "post/"
 
-window.onload = onLoadBlogWindow;
+window.onload = onLoadPostWindow;
 
-function onLoadBlogWindow() {
+function onLoadPostWindow() {
     const blogTable = document.getElementById("post_table");
-    
         fetchPostById(new URLSearchParams(window.location.search).get("id")).then(post => {
         const container = PostContainers.createParentContainer();
         const header = PostContainers.createPostHeader(post);
@@ -20,8 +19,7 @@ function onLoadBlogWindow() {
         blogTable.appendChild(container);
      })
 
-    const element = document.getElementById("post_table");
-    setOpacityFade(element, true);
+    setOpacityFade(blogTable, true);
 }
 
 function setOpacityFade(element, isFadeIn) {

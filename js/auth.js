@@ -31,3 +31,19 @@ async function initAuth() {
 export function getAuthState() {
   return msalInstance.getAllAccounts().length > 0;
 }
+
+export function getAuthToken() {
+  const accounts = msalInstance.getAllAccounts();
+  if (accounts.length === 0) {
+    return null;
+  }
+
+  const request = {
+    scopes: ["api://7d1ba0fc-fef6-4827-8328-fe467f5ceba8/post.edit"],
+    account: accounts[0]
+  };
+
+  return msalInstance.acquireTokenSilent(request)
+    .then(response => response.accessToken)
+    .catch(() => null);
+}
